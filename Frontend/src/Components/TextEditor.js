@@ -39,11 +39,16 @@ const TextEditor = () => {
     try {
       await axios.post(`/${urlId}`, { content });
       toast.success('Content saved successfully!', { autoClose: 1000 });
-      fetchContent(); // Refresh content after saving
+      // Optionally refresh content here
     } catch (error) {
       console.error('Error saving content:', error);
       toast.error('Error saving content.', { autoClose: 1000 });
     }
+  };
+
+  const refreshContent = () => {
+    fetchContent(); // Refresh content manually
+    toast.info('Content refreshed!', { autoClose: 1000 });
   };
 
   const copyContent = () => {
@@ -97,6 +102,9 @@ const TextEditor = () => {
           </Button>
           <Button variant="contained" onClick={clearContent}>
             Clear
+          </Button>
+          <Button variant="contained" color="info" onClick={refreshContent}>
+            Refresh
           </Button>
         </Box>
       </Box>
