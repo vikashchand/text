@@ -62,11 +62,14 @@ const TextEditor = () => {
   return (
     <Container maxWidth="md">
       <Box my={4}>
-        <Typography variant="h4" component="h1" gutterBottom>
+        <Typography variant="h6" component="h1" gutterBottom>
           Echo-Text 🔊📄
         </Typography>
-        <h3 style="text-align: center;">Text will be deleted after 1 hr from databases</h3>
 
+        <Typography variant="h6" component="h6" gutterBottom>
+      Text will be deleted from database after 1 hr
+      </Typography>
+ 
         {qrCodeUrl && (
           <Box mb={2} display="flex" justifyContent="center">
             <img src={qrCodeUrl} alt="QR Code" />

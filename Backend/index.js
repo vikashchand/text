@@ -10,11 +10,19 @@ const dbConfig = require('./config/dbConfig');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// const corsOptions = {
+//   origin: 'https://echotext.vercel.app',
+//   credentials: true,
+//   optionSuccessStatus: 200,
+// };
+
+
 const corsOptions = {
-  origin: 'https://echotext.vercel.app',
+  origin: 'http://localhost://3000',
   credentials: true,
   optionSuccessStatus: 200,
 };
+
 app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
