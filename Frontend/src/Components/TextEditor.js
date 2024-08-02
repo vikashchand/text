@@ -12,25 +12,18 @@ const TextEditor = () => {
   const [qrCodeUrl, setQrCodeUrl] = useState('');
 
   useEffect(() => {
-    const fetchContent = async () => {
-      try {
-        const response = await axios.get(`/${urlId}`);
-        setContent(response.data.content);
-      } catch (error) {
-        console.error('Error fetching content:', error);
-      }
-    };
-
-    // Fetch content initially and generate QR code
     fetchContent();
     generateQRCode();
-
-    // Set up polling every 5 seconds
-    const intervalId = setInterval(fetchContent, 5000);
-
-    // Clean up interval on component unmount
-    return () => clearInterval(intervalId);
   }, [urlId]);
+
+  const fetchContent = async () => {
+    try {
+      const response = await axios.get(`/${urlId}`);
+      setContent(response.data.content);
+    } catch (error) {
+      console.error('Error fetching content:', error);
+    }
+  };
 
   const generateQRCode = async () => {
     try {
@@ -46,6 +39,7 @@ const TextEditor = () => {
     try {
       await axios.post(`/${urlId}`, { content });
       toast.success('Content saved successfully!', { autoClose: 1000 });
+      fetchContent(); // Refresh content after saving
     } catch (error) {
       console.error('Error saving content:', error);
       toast.error('Error saving content.', { autoClose: 1000 });
@@ -60,8 +54,8 @@ const TextEditor = () => {
   const clearContent = async () => {
     try {
       await axios.delete(`/${urlId}`);
-      setContent('');
       toast.success('Content cleared successfully!', { autoClose: 1000 });
+      setContent('');
     } catch (error) {
       console.error('Error clearing content:', error);
       toast.error('Error clearing content.', { autoClose: 1000 });
