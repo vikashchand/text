@@ -65,6 +65,8 @@ const TextEditor = () => {
         <Typography variant="h4" component="h1" gutterBottom>
           Echo-Text 🔊📄
         </Typography>
+        <h3 style="text-align: center;">Text will be deleted after 1 hr from databases</h3>
+
         {qrCodeUrl && (
           <Box mb={2} display="flex" justifyContent="center">
             <img src={qrCodeUrl} alt="QR Code" />
